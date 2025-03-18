@@ -178,7 +178,7 @@ button {
 .selected-restaurant {
   border: 0;
   box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.05);
-  padding: 10px;
+  padding: 2rem;
   border-radius: 8px;
   background-color: var(--card);
   width: 100%;
