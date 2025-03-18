@@ -64,8 +64,9 @@ export default {
     <h2>{{ selectedRestaurant.Restaurant }}</h2>
     <p>地點: {{ selectedRestaurant.Location }}</p>
     <p>類型: {{ selectedRestaurant.Genre }}</p>
-    <p>價格範圍: {{ selectedRestaurant.Price }}</p>
-    <p>評論: {{ selectedRestaurant.Comments }}</p>
+    <p>價格範圍: NT${{ selectedRestaurant.Price }}</p>
+    <p>優惠: {{ selectedRestaurant.Discounts }}</p>
+    <p>留言: {{ selectedRestaurant.Comments }}</p>
     <div class="map">
       <LMap
         :center="[lat, lon]"
@@ -121,9 +122,9 @@ export default {
         <h3>{{ restaurant.Restaurant }}</h3>
         <p>地點: {{ restaurant.Location }}</p>
         <p>類型: {{ restaurant.Genre }}</p>
-        <p>價格範圍: {{ restaurant.Price }}</p>
+        <p>價格範圍: NT${{ restaurant.Price }}</p>
         <p v-if="selectedRestaurant === restaurant">
-          評論: {{ restaurant.Comments }}
+          學生優惠: {{ restaurant.Discounts }}
         </p>
       </div>
     </div>
