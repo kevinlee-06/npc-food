@@ -18,6 +18,7 @@ export default {
       restaurants: [],
       selectedRestaurant: null,
       zoom: 20,
+      loaded: false,
     }
   },
   computed: {
@@ -47,6 +48,7 @@ export default {
         const response = await fetch(CSV)
         const text = await response.text()
         this.restaurants = await csv().fromString(text)
+        this.loaded = true
       } catch (error) {
         console.error('Error loading restaurants:', error)
       }
@@ -63,9 +65,12 @@ export default {
 </script>
 
 <template>
-  <h1>隨機餐廳選擇器</h1>
-  <button @click="getRandomRestaurant">
-    選擇餐廳
+  <h1>{{ loaded ? "北科美食地圖" : "載入中..." }}</h1>
+  <button
+    v-if="loaded"
+    @click="getRandomRestaurant"
+  >
+    亂數選擇餐廳
   </button>
 
   <div
@@ -121,7 +126,9 @@ export default {
   </div>
 
   <div class="all-restaurants">
-    <h2>所有餐廳:</h2>
+    <h2 v-if="lodaed">
+      所有餐廳:
+    </h2>
     <div class="restaurant-grid">
       <div
         v-for="restaurant in restaurants"
