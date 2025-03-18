@@ -6,6 +6,7 @@ export default {
     return {
       restaurants: [],
       selectedRestaurant: null,
+      mapSrc: 'https://www.openstreetmap.org/export/embed.html?bbox=121.531695-0.0001,25.043475-0.0001,121.531695+0.0001,25.043475+0.0001&layer=mapnik&marker=25.043475,121.531695', // Default map source
     }
   },
   mounted() {
@@ -24,12 +25,21 @@ export default {
     getRandomRestaurant() {
       const randomIndex = Math.floor(Math.random() * this.restaurants.length)
       this.selectedRestaurant = this.restaurants[randomIndex]
+      this.updateMap()
     },
-    // toggleDetails(restaurant) {
-    //   this.selectedRestaurant = this.selectedRestaurant === restaurant ? null : restaurant;
-    // },
     toggleDetails(restaurant) {
-      this.$router.push({ path: `/restaurant/${restaurant.id}` }) // 假設你的餐廳數據有一個 id 屬性
+      this.selectedRestaurant = this.selectedRestaurant === restaurant ? null : restaurant
+      if (this.selectedRestaurant) {
+        this.updateMap()
+      }
+    },
+    updateMap() {
+      if (this.selectedRestaurant) {
+        const lat = Number.parseFloat(this.selectedRestaurant.Latitude)
+        const lon = Number.parseFloat(this.selectedRestaurant.Longitude)
+        const size = 0.0001
+        this.mapSrc = `https://www.openstreetmap.org/export/embed.html?bbox=${lon - size},${lat - size},${lon + size},${lat + size}&layer=mapnik&marker=${lat},${lon}`
+      }
     },
   },
 }
@@ -50,8 +60,13 @@ export default {
     <p>地點: {{ selectedRestaurant.Location }}</p>
     <p>類型: {{ selectedRestaurant.Genre }}</p>
     <p>價格範圍: {{ selectedRestaurant.Price }}</p>
-    <p>座標: {{ selectedRestaurant.Coordinates }}</p>
     <p>評論: {{ selectedRestaurant.Comments }}</p>
+    <iframe
+      height="350"
+      :src="mapSrc"
+      style="border: 1px solid black"
+      width="425"
+    /><br><small><a :href="`https://www.openstreetmap.org/?#map=19/${selectedRestaurant.Latitude}/${selectedRestaurant.Longitude}`">View Larger Map</a></small>
   </div>
 
   <div class="all-restaurants">
@@ -81,6 +96,11 @@ h1,
 h2,
 h3 {
   color: var(--bg-contrast);
+  margin-bottom: 1rem;
+}
+
+iframe {
+  border-radius: 1rem;
   margin-bottom: 1rem;
 }
 
