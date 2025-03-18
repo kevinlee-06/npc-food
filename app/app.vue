@@ -23,10 +23,7 @@ const isDark = useDark()
 const toggleDark = useToggle(isDark)
 
 const routes = {
-  '/': '關於',
-  '/projects': '專案',
-  '/join': '加入我們',
-  '/contact': '聯絡資訊',
+  '/': '北科美食地圖',
 }
 
 const breakpoints = useBreakpoints(breakpointsSematic)
@@ -134,145 +131,53 @@ const [mobileMenuOpen, toggleMobileMenu] = useToggle(false)
       </li>
     </menu>
   </Transition>
-
-  <NuxtPage />
+  <div class="container">
+    <NuxtPage />
+  </div>
 </template>
 
 <style>
-:root {
-  --background-color: #f8f9fa;
-  --text-color: #333333;
-  --heading-color: #000000;
-  --button-background-color: #e4e4e4;
-  --button-hover-background-color: #cccccc;
-  --box-background-color: #ffffff;
-  --box-shadow-color: 0 0 1rem rgba(0, 0, 0, 0.1);
-  --link-color: rgb(0, 115, 255);
-  --link-hover-color: rgb(0, 83, 184);
-}
-
-.dark {
-  --background-color: #222222;
-  --text-color: #e0e0e0;
-  --heading-color: #ffffff;
-  --button-background-color: #444444;
-  --button-hover-background-color: #666666;
-  --box-background-color: #2a2a2a;
-  --box-shadow-color: 0 0 1rem rgba(0, 0, 0, 0.1);
-  --link-color: rgb(0, 221, 255);
-  --link-hover-color: rgb(65, 150, 255);
-}
-
 html {
-  background-color: var(--background-color);
-  color: var(--text-color);
-  font-family: 'Arial', sans-serif;
-  line-height: 1.6;
+  font-family: Arial, Helvetica, sans-serif;
+}
+:root {
+  --bg: #fff;
+  --bg-contrast: #111;
+  --bg-contrast-2: #333;
+  --bg-contrast-3: #555;
+  --bg-contrast-4: #777;
+  --bg-contrast-5: #999;
+  --bg-contrast-6: #bbb;
+  --bg-contrast-7: #ddd;
+  --bg-contrast-8: #eee;
+  --bg-contrast-9: #f3f3f3;
+  --bg-contrast-10: #f8f8f8;
+  --bg-selected: #e8efff;
+}
+.dark {
+  --bg: #242424;
+  --bg-contrast: #fff;
+  --bg-contrast-2: #eee;
+  --bg-contrast-3: #ddd;
+  --bg-contrast-4: #bbb;
+  --bg-contrast-5: #999;
+  --bg-contrast-6: #777;
+  --bg-contrast-7: #555;
+  --bg-contrast-8: #333;
+  --bg-contrast-9: #222;
+  --bg-contrast-10: #111;
+  --bg-selected: #333;
 }
 
-h1,
-h2,
-h3 {
-  color: var(--heading-color);
-  margin-bottom: 2rem;
-}
-
-h1 {
-  font-size: 2.5rem;
-}
-
-h2 {
-  font-size: 2rem;
-}
-
-h3 {
-  font-size: 1.75rem;
-}
-
-p {
-  color: var(--text-color);
-  margin-bottom: 1rem;
-}
-
-a {
-  color: var(--link-color);
-  text-decoration: none;
-  transition: color 0.3s;
-  &:hover {
-    color: var(--link-hover-color);
-  }
-}
-
-button {
-  background-color: var(--button-background-color);
-  color: var(--text-color);
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 5px;
-  cursor: pointer;
-  box-shadow: 0 2px 5px var(--box-shadow-color);
-  transition: background-color 0.3s;
-
-  &:hover {
-    background-color: var(--button-hover-background-color);
-  }
-}
-
-.npc-paragraph {
+.container {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  padding: 2rem 0.5rem;
-  margin: auto;
-  /* border-radius: 8px; */
-  max-width: 1000px;
-  & > div {
-    gap: 0;
-  }
-}
-
-.npc-box {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
+  align-items: center;
+  justify-content: start;
+  min-height: calc(100vh - 4rem);
   padding: 2rem;
-  margin: auto;
-  border-radius: 8px;
-  width: 100%;
-  background-color: var(--box-background-color);
-  box-shadow: var(--box-shadow-color);
-
-  .project-content {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-    justify-content: center;
-  }
-
-  .project-image {
-    width: 100%;
-    min-width: 200px;
-    max-width: 300px;
-    max-height: 300px;
-    /* object-fit: cover; */
-    border-radius: 2rem;
-    object-fit: contain;
-  }
-
-  .project-description {
-    flex: 1;
-    min-width: 200px;
-  }
-
-  .project-description p {
-    margin: 0 0 1rem;
-  }
+  background-color: var(--bg);
 }
-
-.shadow {
-  box-shadow: rgba(131, 131, 131, 0.479) 1px 1px 40px;
-}
-
 #header,
 #header-mobile-menu {
   background-color: #333 !important;

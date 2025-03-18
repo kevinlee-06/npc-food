@@ -1,31 +1,137 @@
+<script>
+import csv from 'csvtojson'
+
+export default {
+  data() {
+    return {
+      restaurants: [],
+      selectedRestaurant: null,
+    }
+  },
+  mounted() {
+    this.loadRestaurants()
+  },
+  methods: {
+    async loadRestaurants() {
+      try {
+        const response = await fetch('/food.csv')
+        const text = await response.text()
+        this.restaurants = await csv().fromString(text)
+      } catch (error) {
+        console.error('Error loading restaurants:', error)
+      }
+    },
+    getRandomRestaurant() {
+      const randomIndex = Math.floor(Math.random() * this.restaurants.length)
+      this.selectedRestaurant = this.restaurants[randomIndex]
+    },
+    // toggleDetails(restaurant) {
+    //   this.selectedRestaurant = this.selectedRestaurant === restaurant ? null : restaurant;
+    // },
+    toggleDetails(restaurant) {
+      this.$router.push({ path: `/restaurant/${restaurant.id}` }) // 假設你的餐廳數據有一個 id 屬性
+    },
+  },
+}
+</script>
+
 <template>
-  <div class="npc-paragraph">
-    <h1>關於我們</h1>
-    <div>
-      <p>由一群熱愛程式設計的學生所組成的社團</p>
-      <p>扭轉迷思，提供許多管道給想要學習程式的你！</p>
-    </div>
+  <h1>隨機餐廳選擇器</h1>
+  <button @click="getRandomRestaurant">
+    選擇餐廳
+  </button>
 
-    <div>
-      <h2>我們的活動</h2>
-      <ul>
-        <li>定期舉辦程式設計課程</li>
-      </ul>
-    </div>
+  <div
+    v-if="selectedRestaurant"
+    class="selected-restaurant"
+  >
+    <h3>{{ selectedRestaurant.Restaurant }}</h3>
+    <p>地點: {{ selectedRestaurant.Location }}</p>
+    <p>類型: {{ selectedRestaurant.Genre }}</p>
+    <p>價格範圍: {{ selectedRestaurant.Price }}</p>
+    <p>座標: {{ selectedRestaurant.Coordinates }}</p>
+    <p>評論: {{ selectedRestaurant.Comments }}</p>
+  </div>
 
-    <div>
-      <h2>為什麼加入我們？</h2>
-      <p>加入我們的社團，你將能夠：</p>
-      <ul>
-        <li>與志同道合的朋友建立聯繫</li>
-        <li>獲得實用的程式設計技能</li>
-        <li>參加有趣的活動和挑戰</li>
-        <li>獲得指導和支持，幫助你在程式設計的旅程中成長</li>
-      </ul>
+  <div class="all-restaurants">
+    <h2>所有餐廳:</h2>
+    <div class="restaurant-grid">
+      <div
+        v-for="restaurant in restaurants"
+        :key="restaurant.Restaurant"
+        class="restaurant-card"
+        :class="{ selected: selectedRestaurant === restaurant }"
+        @click="toggleDetails(restaurant)"
+      >
+        <h3>{{ restaurant.Restaurant }}</h3>
+        <p>地點: {{ restaurant.Location }}</p>
+        <p>類型: {{ restaurant.Genre }}</p>
+        <p>價格範圍: {{ restaurant.Price }}</p>
+        <p v-if="selectedRestaurant === restaurant">
+          評論: {{ restaurant.Comments }}
+        </p>
+      </div>
     </div>
-
-    <button @click="$router.push('/join')">
-      加入我們
-    </button>
   </div>
 </template>
+
+<style>
+h1,
+h2,
+h3 {
+  color: var(--bg-contrast);
+  margin-bottom: 1rem;
+}
+
+p {
+  color: var(--bg-contrast);
+}
+
+button {
+  background-color: var(--bg-contrast);
+  color: var(--bg);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-bottom: 1rem;
+}
+.all-restaurants {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.selected-restaurant {
+  border: 0;
+  box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  border-radius: 5px;
+  background-color: var(--bg-contrast-8);
+}
+
+.restaurant-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.restaurant-card {
+  border: 0;
+  box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  border-radius: 5px;
+  background-color: var(--bg-contrast-8);
+  cursor: pointer; /* 讓卡片看起來可以點擊 */
+  transition: transform 0.2s; /* 添加過渡效果 */
+}
+
+.restaurant-card:hover {
+  transform: scale(1.05);
+}
+
+.selected {
+  background-color: var(--bg-selected); /* 選中卡片的背景顏色 */
+  color: white; /* 選中卡片的文字顏色 */
+}
+</style>
