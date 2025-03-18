@@ -24,6 +24,7 @@ const toggleDark = useToggle(isDark)
 
 const routes = {
   '/': '北科美食地圖',
+  'https://github.com/kevinlee-06/npc-food': '貢獻',
 }
 
 const breakpoints = useBreakpoints(breakpointsSematic)
@@ -79,7 +80,7 @@ const [mobileMenuOpen, toggleMobileMenu] = useToggle(false)
           </li>
           <li>
             <a
-              href="https://github.com/NTUT-NPC"
+              href="https://github.com/kevinlee-06/npc-food"
               target="_blank"
             ><IconGitHub /></a>
           </li>
@@ -119,7 +120,7 @@ const [mobileMenuOpen, toggleMobileMenu] = useToggle(false)
       </li>
       <li>
         <a
-          href="https://github.com/NTUT-NPC"
+          href="https://github.com/kevinlee-06/npc-food"
           target="_blank"
         ><IconGitHub />GitHub</a>
       </li>
