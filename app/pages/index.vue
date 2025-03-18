@@ -1,6 +1,6 @@
 <script>
 import { LMap, LMarker, LPolygon, LPopup, LTileLayer } from '@vue-leaflet/vue-leaflet'
-import { csv } from 'csvtojson' // Ensure you have this import for CSV parsing
+import { csv } from 'csvtojson'
 import 'leaflet/dist/leaflet.css'
 
 export default {
@@ -15,7 +15,7 @@ export default {
     return {
       restaurants: [],
       selectedRestaurant: null,
-      zoom: 20, // Set the zoom level for the map
+      zoom: 20,
     }
   },
   computed: {
