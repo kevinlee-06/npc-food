@@ -59,13 +59,16 @@ export default {
     },
     toggleDetails(restaurant) {
       this.selectedRestaurant = this.selectedRestaurant === restaurant ? this.restaurants[0] : restaurant
+      window.scrollTo({ top: document.getElementById('title').offsetTop, behavior: 'smooth' })
     },
   },
 }
 </script>
 
 <template>
-  <h1>{{ loaded ? "北科美食地圖" : "載入中..." }}</h1>
+  <h1 id="title">
+    {{ loaded ? "北科美食地圖" : "載入中..." }}
+  </h1>
   <button
     v-if="loaded"
     @click="getRandomRestaurant"
@@ -140,9 +143,6 @@ export default {
         <p>地點: {{ restaurant.Location }}</p>
         <p>類型: {{ restaurant.Genre }}</p>
         <p>價格範圍: NT${{ restaurant.Price }}</p>
-        <p v-if="selectedRestaurant === restaurant">
-          學生優惠: {{ restaurant.Discounts }}
-        </p>
       </div>
     </div>
   </div>
