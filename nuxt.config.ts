@@ -9,6 +9,7 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     'radix-vue/nuxt',
     'unplugin-icons/nuxt',
+    '@nuxtjs/leaflet',
   ],
   postcss: {
     plugins: {

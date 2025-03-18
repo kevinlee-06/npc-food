@@ -14,9 +14,18 @@ export default {
     return {
       restaurants: [],
       selectedRestaurant: null,
-      zoom: 17,
+      zoom: 20, // Set the zoom level for the map
     }
   },
+  computed: {
+    lat() {
+      return this.selectedRestaurant ? Number.parseFloat(this.selectedRestaurant.Latitude) : 0
+    },
+    lon() {
+      return this.selectedRestaurant ? Number.parseFloat(this.selectedRestaurant.Longitude) : 0
+    },
+  },
+
   mounted() {
     this.loadRestaurants()
   },
@@ -42,55 +51,65 @@ export default {
 </script>
 
 <template>
-  <h1>隨機餐廳選擇器</h1>
-  <button @click="getRandomRestaurant">
-    選擇餐廳
-  </button>
+  <div>
+    <h1>隨機餐廳選擇器</h1>
+    <button @click="getRandomRestaurant">
+      選擇餐廳
+    </button>
 
-  <div
-    v-if="selectedRestaurant"
-    class="selected-restaurant"
-  >
-    <h3>{{ selectedRestaurant.Restaurant }}</h3>
-    <p>地點: {{ selectedRestaurant.Location }}</p>
-    <p>類型: {{ selectedRestaurant.Genre }}</p>
-    <p>價格範圍: {{ selectedRestaurant.Price }}</p>
-    <p>評論: {{ selectedRestaurant.Comments }}</p>
-    <br>
-    <LMap
-      v-model:zoom="zoom"
-      :center="[selectedRestaurant.Latitude, selectedRestaurant.Longitude]"
-      style="height: 350px;"
+    <div
+      v-if="selectedRestaurant"
+      class="selected-restaurant"
     >
-      <LTileLayer
-        layer-type="base"
-        name="OpenStreetMap"
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
-      <LMarker :lat-lng="[selectedRestaurant.Latitude, selectedRestaurant.Longitude]">
-        <LPopup>{{ selectedRestaurant.Restaurant }}</LPopup>
-      </LMarker>
-    </LMap>
-    <br>
-  </div>
-
-  <div class="all-restaurants">
-    <h2>所有餐廳:</h2>
-    <div class="restaurant-grid">
+      <h3>{{ selectedRestaurant.Restaurant }}</h3>
+      <p>地點: {{ selectedRestaurant.Location }}</p>
+      <p>類型: {{ selectedRestaurant.Genre }}</p>
+      <p>價格範圍: {{ selectedRestaurant.Price }}</p>
+      <p>評論: {{ selectedRestaurant.Comments }}</p>
       <div
-        v-for="restaurant in restaurants"
-        :key="restaurant.Restaurant"
-        class="restaurant-card"
-        :class="{ selected: selectedRestaurant === restaurant }"
-        @click="toggleDetails(restaurant)"
+        class="map"
+        style="height:400px; width:600px"
       >
-        <h3>{{ restaurant.Restaurant }}</h3>
-        <p>地點: {{ restaurant.Location }}</p>
-        <p>類型: {{ restaurant.Genre }}</p>
-        <p>價格範圍: {{ restaurant.Price }}</p>
-        <p v-if="selectedRestaurant === restaurant">
-          評論: {{ restaurant.Comments }}
-        </p>
+        <LMap
+          :center="[lat, lon]"
+          :use-global-leaflet="false"
+          :zoom="zoom"
+        >
+          <LTileLayer
+            attribution="&amp;copy; <a href=&quot;https://www.openstreetmap.org/&quot;>OpenStreetMap</a> contributors"
+            layer-type="base"
+            name="OpenStreetMap"
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          <LMarker
+            draggable
+            :lat-lng="[lat, lon]"
+          >
+            <LPopup>{{ selectedRestaurant.Restaurant }}</LPopup>
+          </LMarker>
+        </LMap>
+      </div>
+      <br>
+    </div>
+
+    <div class="all-restaurants">
+      <h2>所有餐廳:</h2>
+      <div class="restaurant-grid">
+        <div
+          v-for="restaurant in restaurants"
+          :key="restaurant.Restaurant"
+          class="restaurant-card"
+          :class="{ selected: selectedRestaurant === restaurant }"
+          @click="toggleDetails(restaurant)"
+        >
+          <h3>{{ restaurant.Restaurant }}</h3>
+          <p>地點: {{ restaurant.Location }}</p>
+          <p>類型: {{ restaurant.Genre }}</p>
+          <p>價格範圍: {{ restaurant.Price }}</p>
+          <p v-if="selectedRestaurant === restaurant">
+            評論: {{ restaurant.Comments }}
+          </p>
+        </div>
       </div>
     </div>
   </div>
@@ -101,11 +120,6 @@ h1,
 h2,
 h3 {
   color: var(--bg-contrast);
-  margin-bottom: 1rem;
-}
-
-iframe {
-  border-radius: 1rem;
   margin-bottom: 1rem;
 }
 

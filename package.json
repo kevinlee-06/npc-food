@@ -16,10 +16,10 @@
   },
   "dependencies": {
     "@iconify-json/mingcute": "1.2.3",
+    "@nuxtjs/leaflet": "1.2.6",
     "@vueuse/core": "12.7.0",
     "@vueuse/nuxt": "12.7.0",
     "csvtojson": "^2.0.10",
-    "leaflet": "^1.9.4",
     "nuxt": "3.15.4",
     "postcss": "8.5.3",
     "postcss-nesting": "13.0.1",

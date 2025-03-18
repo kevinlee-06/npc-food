@@ -11,6 +11,9 @@ importers:
       '@iconify-json/mingcute':
         specifier: 1.2.3
         version: 1.2.3
+      '@nuxtjs/leaflet':
+        specifier: 1.2.6
+        version: 1.2.6(typescript@5.8.2)
       '@vueuse/core':
         specifier: 12.7.0
         version: 12.7.0(typescript@5.8.2)
@@ -20,9 +23,6 @@ importers:
       csvtojson:
         specifier: ^2.0.10
         version: 2.0.10
-      leaflet:
-        specifier: ^1.9.4
-        version: 1.9.4
       nuxt:
         specifier: 3.15.4
         version: 3.15.4(@parcel/watcher@2.5.1)(@types/node@22.13.10)(db0@0.3.1)(eslint@9.21.0(jiti@2.4.2))(ioredis@5.6.0)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.36.0)(terser@5.39.0)(typescript@5.8.2)(vite@6.2.2(@types/node@22.13.10)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0))(yaml@2.7.0)
@@ -833,6 +833,9 @@ packages:
     peerDependencies:
       vue: ^3.3.4
 
+  '@nuxtjs/leaflet@1.2.6':
+    resolution: {integrity: sha512-AOefIxck/cp8LOndV91cbWfHy3qDOtxnGfSABZUxPpZNv3dBn+zY+kX/r8zmkHaoTAevFYMs7mv+oeMA2PmGJQ==}
+
   '@parcel/watcher-android-arm64@2.5.1':
     resolution: {integrity: sha512-KF8+j9nNbUN8vzOFDpRMsaKBHZ/mcjEjMToVMJOhTozkDonQFFrRcfdLWn6yWKCmJKmdVxSgHiYvTCef4/qcBA==}
     engines: {node: '>= 10.0.0'}
@@ -1167,11 +1170,17 @@ packages:
   '@types/estree@1.0.6':
     resolution: {integrity: sha512-AYnb1nQyY49te+VRAVgmzfcgjYS91mY5P0TKUDCLEM+gNnA+3T6rWITXRLYCpahpqSQbN5cE+gHpnPyXjHWxcw==}
 
+  '@types/geojson@7946.0.16':
+    resolution: {integrity: sha512-6C8nqWur3j98U6+lXDfTUWIfgvZU+EumvpHKcYjujKH7woYyLj2sUmff0tRhrqM7BohUw7Pz3ZB1jj2gW9Fvmg==}
+
   '@types/http-proxy@1.17.16':
     resolution: {integrity: sha512-sdWoUajOB1cd0A8cRRQ1cfyWNbmFKLAqBB89Y8x5iYyG/mkJHc0YUH8pdWBy2omi9qtCpiIgGjuwO0dQST2l5w==}
 
   '@types/json-schema@7.0.15':
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
+
+  '@types/leaflet@1.9.16':
+    resolution: {integrity: sha512-wzZoyySUxkgMZ0ihJ7IaUIblG8Rdc8AbbZKLneyn+QjYsj5q1QU7TEKYqwTr10BGSzY5LI7tJk9Ifo+mEjdFRw==}
 
   '@types/mdast@4.0.4':
     resolution: {integrity: sha512-kGaNbPh1k7AFzgpud/gMdvIm5xuECykRR+JnWKQno9TAXVa6WIVCGTPvYGekIDL4uwCZQSYbUxNBSb1aUo79oA==}
@@ -1346,6 +1355,15 @@ packages:
       typescript:
         optional: true
       vitest:
+        optional: true
+
+  '@vue-leaflet/vue-leaflet@0.10.1':
+    resolution: {integrity: sha512-RNEDk8TbnwrJl8ujdbKgZRFygLCxd0aBcWLQ05q/pGv4+d0jamE3KXQgQBqGAteE1mbQsk3xoNcqqUgaIGfWVg==}
+    peerDependencies:
+      '@types/leaflet': ^1.5.7
+      leaflet: ^1.6.0
+    peerDependenciesMeta:
+      '@types/leaflet':
         optional: true
 
   '@vue-macros/common@1.16.1':
@@ -5407,6 +5425,14 @@ snapshots:
       - vue-tsc
       - yaml
 
+  '@nuxtjs/leaflet@1.2.6(typescript@5.8.2)':
+    dependencies:
+      '@types/leaflet': 1.9.16
+      '@vue-leaflet/vue-leaflet': 0.10.1(@types/leaflet@1.9.16)(leaflet@1.9.4)(typescript@5.8.2)
+      leaflet: 1.9.4
+    transitivePeerDependencies:
+      - typescript
+
   '@parcel/watcher-android-arm64@2.5.1':
     optional: true
 
@@ -5683,11 +5709,17 @@ snapshots:
 
   '@types/estree@1.0.6': {}
 
+  '@types/geojson@7946.0.16': {}
+
   '@types/http-proxy@1.17.16':
     dependencies:
       '@types/node': 22.13.10
 
   '@types/json-schema@7.0.15': {}
+
+  '@types/leaflet@1.9.16':
+    dependencies:
+      '@types/geojson': 7946.0.16
 
   '@types/mdast@4.0.4':
     dependencies:
@@ -5889,6 +5921,15 @@ snapshots:
       eslint: 9.21.0(jiti@2.4.2)
     optionalDependencies:
       typescript: 5.8.2
+
+  '@vue-leaflet/vue-leaflet@0.10.1(@types/leaflet@1.9.16)(leaflet@1.9.4)(typescript@5.8.2)':
+    dependencies:
+      leaflet: 1.9.4
+      vue: 3.5.13(typescript@5.8.2)
+    optionalDependencies:
+      '@types/leaflet': 1.9.16
+    transitivePeerDependencies:
+      - typescript
 
   '@vue-macros/common@1.16.1(vue@3.5.13(typescript@5.8.2))':
     dependencies:
