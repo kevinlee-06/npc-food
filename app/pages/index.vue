@@ -152,16 +152,16 @@ export default {
 h1,
 h2,
 h3 {
-  color: var(--bg-contrast);
+  color: var(--text);
   margin-bottom: 1rem;
 }
 
 p {
-  color: var(--bg-contrast);
+  color: var(--text);
 }
 
 button {
-  background-color: var(--bg-contrast);
+  background-color: var(--text);
   color: var(--bg);
   border: none;
   padding: 10px 20px;
@@ -177,12 +177,15 @@ button {
 
 .selected-restaurant {
   border: 0;
-  box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.05);
   padding: 10px;
-  border-radius: 5px;
-  background-color: var(--bg-contrast-8);
+  border-radius: 8px;
+  background-color: var(--card);
   width: 100%;
+  transition: all 0.25s ease;
   max-width: 800px;
+  overflow: hidden;
+  text-decoration: none;
 }
 
 .restaurant-grid {
@@ -193,12 +196,14 @@ button {
 
 .restaurant-card {
   border: 0;
-  box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.05);
   padding: 10px;
-  border-radius: 5px;
-  background-color: var(--bg-contrast-8);
+  border-radius: 8px;
+  background-color: var(--card);
   cursor: pointer;
-  transition: transform 0.2s;
+  transition: all 0.25s ease;
+  overflow: hidden;
+  text-decoration: none;
 }
 
 .restaurant-card:hover {
@@ -206,8 +211,7 @@ button {
 }
 
 .selected {
-  background-color: var(--bg-selected);
-  color: white;
+  background-color: var(--card);
 }
 
 .map {

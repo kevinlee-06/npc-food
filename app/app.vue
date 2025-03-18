@@ -144,6 +144,7 @@ html {
   --bg: #f4f7f8;
   --card: #ffffff;
   --text: #333;
+  --transition: 0.15s ease;
 }
 .dark {
   --bg: #333;
