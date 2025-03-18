@@ -7,7 +7,6 @@ import IconMenu from '~icons/mingcute/menu-fill'
 import IconMoon from '~icons/mingcute/moon-fill'
 
 import 'assets/reset.css'
-import 'assets/cubic-11.css'
 
 useHead({
   title: '北科程式設計研究社',
@@ -214,7 +213,7 @@ html {
 }
 
 #header {
-  font-family: 'Cubic 11';
+  font-family: 'Arial', 'Helvetica', sans-serif;
   display: flex;
   justify-content: space-between;
   align-items: center;
