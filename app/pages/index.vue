@@ -34,15 +34,6 @@ export default {
     this.loadRestaurantsFromCloud()
   },
   methods: {
-    async loadRestaurants() {
-      try {
-        const response = await fetch('/food.csv')
-        const text = await response.text()
-        this.restaurants = await csv().fromString(text)
-      } catch (error) {
-        console.error('Error loading restaurants:', error)
-      }
-    },
     async loadRestaurantsFromCloud() {
       try {
         const response = await fetch(CSV_URL)
