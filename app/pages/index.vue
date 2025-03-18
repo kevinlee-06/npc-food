@@ -122,7 +122,6 @@ export default {
         />
       </LMap>
     </div>
-    <br>
   </div>
 
   <div class="all-restaurants">
