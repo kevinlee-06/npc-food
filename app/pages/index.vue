@@ -125,7 +125,7 @@ export default {
   </div>
 
   <div class="all-restaurants">
-    <h2 v-if="lodaed">
+    <h2 v-if="loaded">
       所有餐廳:
     </h2>
     <div class="restaurant-grid">
