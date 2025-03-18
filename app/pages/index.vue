@@ -1,12 +1,20 @@
 <script>
-import csv from 'csvtojson'
+import { LMap, LMarker, LPopup, LTileLayer } from '@vue-leaflet/vue-leaflet'
+import { csv } from 'csvtojson' // Ensure you have this import for CSV parsing
+import 'leaflet/dist/leaflet.css'
 
 export default {
+  components: {
+    LMap,
+    LTileLayer,
+    LMarker,
+    LPopup,
+  },
   data() {
     return {
       restaurants: [],
       selectedRestaurant: null,
-      mapSrc: 'https://www.openstreetmap.org/export/embed.html?bbox=121.531695-0.0001,25.043475-0.0001,121.531695+0.0001,25.043475+0.0001&layer=mapnik&marker=25.043475,121.531695', // Default map source
+      zoom: 17,
     }
   },
   mounted() {
@@ -25,21 +33,9 @@ export default {
     getRandomRestaurant() {
       const randomIndex = Math.floor(Math.random() * this.restaurants.length)
       this.selectedRestaurant = this.restaurants[randomIndex]
-      this.updateMap()
     },
     toggleDetails(restaurant) {
       this.selectedRestaurant = this.selectedRestaurant === restaurant ? null : restaurant
-      if (this.selectedRestaurant) {
-        this.updateMap()
-      }
-    },
-    updateMap() {
-      if (this.selectedRestaurant) {
-        const lat = Number.parseFloat(this.selectedRestaurant.Latitude)
-        const lon = Number.parseFloat(this.selectedRestaurant.Longitude)
-        const size = 0.0001
-        this.mapSrc = `https://www.openstreetmap.org/export/embed.html?bbox=${lon - size},${lat - size},${lon + size},${lat + size}&layer=mapnik&marker=${lat},${lon}`
-      }
     },
   },
 }
@@ -53,20 +49,29 @@ export default {
 
   <div
     v-if="selectedRestaurant"
-    class="selected-restaurant "
-    @click="toggleDetails(selectedRestaurant)"
+    class="selected-restaurant"
   >
     <h3>{{ selectedRestaurant.Restaurant }}</h3>
     <p>地點: {{ selectedRestaurant.Location }}</p>
     <p>類型: {{ selectedRestaurant.Genre }}</p>
     <p>價格範圍: {{ selectedRestaurant.Price }}</p>
     <p>評論: {{ selectedRestaurant.Comments }}</p>
-    <iframe
-      height="350"
-      :src="mapSrc"
-      style="border: 1px solid black"
-      width="425"
-    /><br><small><a :href="`https://www.openstreetmap.org/?#map=19/${selectedRestaurant.Latitude}/${selectedRestaurant.Longitude}`">View Larger Map</a></small>
+    <br>
+    <LMap
+      v-model:zoom="zoom"
+      :center="[selectedRestaurant.Latitude, selectedRestaurant.Longitude]"
+      style="height: 350px;"
+    >
+      <LTileLayer
+        layer-type="base"
+        name="OpenStreetMap"
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      />
+      <LMarker :lat-lng="[selectedRestaurant.Latitude, selectedRestaurant.Longitude]">
+        <LPopup>{{ selectedRestaurant.Restaurant }}</LPopup>
+      </LMarker>
+    </LMap>
+    <br>
   </div>
 
   <div class="all-restaurants">
@@ -129,6 +134,8 @@ button {
   padding: 10px;
   border-radius: 5px;
   background-color: var(--bg-contrast-8);
+  width: 100%;
+  max-width: 800px;
 }
 
 .restaurant-grid {
@@ -143,8 +150,8 @@ button {
   padding: 10px;
   border-radius: 5px;
   background-color: var(--bg-contrast-8);
-  cursor: pointer; /* 讓卡片看起來可以點擊 */
-  transition: transform 0.2s; /* 添加過渡效果 */
+  cursor: pointer;
+  transition: transform 0.2s;
 }
 
 .restaurant-card:hover {
@@ -152,7 +159,7 @@ button {
 }
 
 .selected {
-  background-color: var(--bg-selected); /* 選中卡片的背景顏色 */
-  color: white; /* 選中卡片的文字顏色 */
+  background-color: var(--bg-selected);
+  color: white;
 }
 </style>
