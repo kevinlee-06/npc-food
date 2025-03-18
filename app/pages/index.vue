@@ -29,6 +29,18 @@ export default {
     lon() {
       return this.selectedRestaurant ? Number.parseFloat(this.selectedRestaurant.Longitude) : 0
     },
+    paymentMethods() {
+      const methods = []
+      if (this.selectedRestaurant) {
+        if (this.selectedRestaurant.LinePay === '1') methods.push('Line Pay')
+        if (this.selectedRestaurant.TWQR === '1') methods.push('TWQR')
+        if (this.selectedRestaurant.Cash === '1') methods.push('現金')
+        if (this.selectedRestaurant.EasyCard === '1') methods.push('悠遊卡')
+        if (this.selectedRestaurant.CreditCard === '1') methods.push('信用卡')
+        if (this.selectedRestaurant.JKO === '1') methods.push('街口支付')
+      }
+      return methods.length > 0 ? methods.join(', ') : '無可用付款方式'
+    },
   },
 
   mounted() {
@@ -73,21 +85,35 @@ export default {
     class="selected-restaurant"
   >
     <h2>{{ selectedRestaurant.Restaurant }}</h2>
-    <p v-if="selectedRestaurant.Location">
-      地點: {{ selectedRestaurant.Location }}
-    </p>
-    <p v-if="selectedRestaurant.Genre">
-      類型: {{ selectedRestaurant.Genre }}
-    </p>
-    <p v-if="selectedRestaurant.Price">
-      價格範圍: NT${{ selectedRestaurant.Price }}
-    </p>
-    <p v-if="selectedRestaurant.Discounts">
-      優惠: {{ selectedRestaurant.Discounts }}
-    </p>
-    <p v-if="selectedRestaurant.Comments">
-      留言: {{ selectedRestaurant.Comments }}
-    </p>
+    <div class="restaurant-details">
+      <div class="restaurant-p-container">
+        <p v-if="selectedRestaurant.Location">
+          地點: {{ selectedRestaurant.Location }}
+        </p>
+        <p v-if="selectedRestaurant.Genre">
+          類型: {{ selectedRestaurant.Genre }}
+        </p>
+        <p v-if="selectedRestaurant.Price">
+          價格範圍: NT${{ selectedRestaurant.Price }}
+        </p>
+        <p v-if="selectedRestaurant.Discounts">
+          優惠: {{ selectedRestaurant.Discounts }}
+        </p>
+        <p v-if="selectedRestaurant.Comments">
+          留言: {{ selectedRestaurant.Comments }}
+        </p>
+        <p>付款方式: {{ paymentMethods }}</p>
+      </div>
+      <NuxtLink
+        v-if="selectedRestaurant.OrderOnline"
+        target="_blank"
+        :to="selectedRestaurant.OrderOnline"
+      >
+        <button class="order-button">
+          線上訂餐
+        </button>
+      </NuxtLink>
+    </div>
     <div class="map">
       <LMap
         v-if="selectedRestaurant.Latitude && selectedRestaurant.Longitude"
@@ -255,6 +281,20 @@ button {
 
   .leaflet-container {
     border-radius: 1rem;
+  }
+}
+
+.restaurant-details {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  .order-button {
+    margin: auto;
+    margin-top: 1rem;
+  }
+  .restaurant-p-container {
+    margin-right: 1rem;
   }
 }
 </style>
