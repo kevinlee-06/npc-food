@@ -5,13 +5,11 @@ export default {
   data() {
     return {
       restaurant: null,
-      mapSrc: '',
     }
   },
   async mounted() {
     await this.loadRestaurants()
     this.getRestaurantById(this.$route.params.id)
-    this.mapSrc = `https://maps.google.com/maps?q=${this.restaurant.FullAddress + this.restaurant.Restaurant}&output=embed`
   },
   methods: {
     async loadRestaurants() {
@@ -24,8 +22,7 @@ export default {
       }
     },
     getRestaurantById(id) {
-      const restaurantId = Number.parseInt(id) // 將 id 轉換為整數
-      this.restaurant = this.restaurants.find((restaurant) => restaurant.id === restaurantId)
+      this.restaurant = this.restaurants.find((restaurant) => Number.parseInt(restaurant.id) === Number.parseInt(id))
     },
   },
 }
@@ -41,16 +38,6 @@ export default {
     <p>地點: {{ restaurant.Location }}</p>
     <p>類型: {{ restaurant.Genre }}</p>
     <p>價格範圍: {{ restaurant.Price }}</p>
-    <iframe
-      id="gmap_canvas"
-      frameborder="0"
-      height="500"
-      marginheight="0"
-      marginwidth="0"
-      scrolling="no"
-      :src="mapSrc"
-      width="600"
-    />
     <p>評論: {{ restaurant.Comments }}</p>
   </div>
   <div
