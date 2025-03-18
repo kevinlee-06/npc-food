@@ -1,5 +1,5 @@
 <script>
-import { LMap, LMarker, LPopup, LTileLayer } from '@vue-leaflet/vue-leaflet'
+import { LMap, LMarker, LPolygon, LPopup, LTileLayer } from '@vue-leaflet/vue-leaflet'
 import { csv } from 'csvtojson' // Ensure you have this import for CSV parsing
 import 'leaflet/dist/leaflet.css'
 
@@ -9,6 +9,7 @@ export default {
     LTileLayer,
     LMarker,
     LPopup,
+    LPolygon,
   },
   data() {
     return {
@@ -87,6 +88,25 @@ export default {
           >
             <LPopup>{{ selectedRestaurant.Restaurant }}</LPopup>
           </LMarker>
+          <LPolygon
+            id="北科校區"
+            color="#41b782"
+            :fill="true"
+            fill-color="#41b782"
+            :fill-opacity="0.5"
+            :lat-lngs="[
+              [25.042499915975604, 121.5330912641657],
+              [25.041955580123695, 121.53661032227251],
+              [25.043345575810104, 121.53627772836607],
+              [25.043714942642538, 121.53630455045088],
+              [25.043885045415383, 121.53553743869892],
+              [25.043982246893908, 121.53526653559774],
+              [25.04407458822715, 121.53466840300793],
+              [25.04431030132269, 121.53423656735129],
+              [25.044631064797045, 121.53390397344485],
+              [25.044373482075894, 121.53308321748595],
+            ]"
+          />
         </LMap>
       </div>
       <br>
