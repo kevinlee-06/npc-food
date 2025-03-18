@@ -43,7 +43,8 @@ export default {
 
   <div
     v-if="selectedRestaurant"
-    class="selected-restaurant"
+    class="selected-restaurant restaurant-card"
+    @click="toggleDetails(selectedRestaurant)"
   >
     <h3>{{ selectedRestaurant.Restaurant }}</h3>
     <p>地點: {{ selectedRestaurant.Location }}</p>
