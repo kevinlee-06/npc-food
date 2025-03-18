@@ -197,5 +197,9 @@ button {
   width: 100%;
   height: 400px;
   margin-top: 20px;
+
+  .leaflet-container {
+    border-radius: 1rem;
+  }
 }
 </style>
