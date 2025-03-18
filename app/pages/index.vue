@@ -45,7 +45,7 @@ export default {
       this.selectedRestaurant = this.restaurants[randomIndex]
     },
     toggleDetails(restaurant) {
-      this.selectedRestaurant = this.selectedRestaurant === restaurant ? null : restaurant
+      this.selectedRestaurant = this.selectedRestaurant === restaurant ? this.restaurants[0] : restaurant
     },
   },
 }
