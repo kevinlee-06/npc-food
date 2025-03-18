@@ -81,13 +81,24 @@ export default {
     class="selected-restaurant"
   >
     <h2>{{ selectedRestaurant.Restaurant }}</h2>
-    <p>地點: {{ selectedRestaurant.Location }}</p>
-    <p>類型: {{ selectedRestaurant.Genre }}</p>
-    <p>價格範圍: NT${{ selectedRestaurant.Price }}</p>
-    <p>優惠: {{ selectedRestaurant.Discounts }}</p>
-    <p>留言: {{ selectedRestaurant.Comments }}</p>
+    <p v-if="selectedRestaurant.Location">
+      地點: {{ selectedRestaurant.Location }}
+    </p>
+    <p v-if="selectedRestaurant.Genre">
+      類型: {{ selectedRestaurant.Genre }}
+    </p>
+    <p v-if="selectedRestaurant.Price">
+      價格範圍: NT${{ selectedRestaurant.Price }}
+    </p>
+    <p v-if="selectedRestaurant.Discounts">
+      優惠: {{ selectedRestaurant.Discounts }}
+    </p>
+    <p v-if="selectedRestaurant.Comments">
+      留言: {{ selectedRestaurant.Comments }}
+    </p>
     <div class="map">
       <LMap
+        v-if="selectedRestaurant.Latitude && selectedRestaurant.Longitude"
         :center="[lat, lon]"
         :use-global-leaflet="false"
         :zoom="zoom"
