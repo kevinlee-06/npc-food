@@ -3,6 +3,8 @@ import { LMap, LMarker, LPolygon, LPopup, LTileLayer } from '@vue-leaflet/vue-le
 import { csv } from 'csvtojson'
 import 'leaflet/dist/leaflet.css'
 
+const CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRQNC4pGJQh5d6FCu7vHBTKD8Nq7ZrUuJqrQPhNFHORt-8HfWE-S66ec4pi4Oj7mpHWL7t1KdKj5F0r/pub?gid=1709653989&single=true&output=csv'
+
 export default {
   components: {
     LMap,
@@ -28,12 +30,21 @@ export default {
   },
 
   mounted() {
-    this.loadRestaurants()
+    this.loadRestaurantsFromCloud()
   },
   methods: {
     async loadRestaurants() {
       try {
         const response = await fetch('/food.csv')
+        const text = await response.text()
+        this.restaurants = await csv().fromString(text)
+      } catch (error) {
+        console.error('Error loading restaurants:', error)
+      }
+    },
+    async loadRestaurantsFromCloud() {
+      try {
+        const response = await fetch(CSV)
         const text = await response.text()
         this.restaurants = await csv().fromString(text)
       } catch (error) {
