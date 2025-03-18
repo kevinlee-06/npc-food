@@ -3,8 +3,8 @@ import { LMap, LMarker, LPolygon, LPopup, LTileLayer } from '@vue-leaflet/vue-le
 import { csv } from 'csvtojson'
 import 'leaflet/dist/leaflet.css'
 
-const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTNQAYsJcztzdIRq1DbhTTKVgwoeobv3BRjxJcVTqk9J_Dgn_oRboZkIkHq_DMK1eSRw2ozzqwVBbBB/pub?gid=1709653989&single=true&output=csv'
-
+const URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTNQAYsJcztzdIRq1DbhTTKVgwoeobv3BRjxJcVTqk9J_Dgn_oRboZkIkHq_DMK1eSRw2ozzqwVBbBB/pub?gid=1709653989&single=true'
+const CSV_URL = `${URL}&output=csv`
 export default {
   components: {
     LMap,
@@ -19,6 +19,7 @@ export default {
       selectedRestaurant: null,
       zoom: 20,
       loaded: false,
+      url: URL,
     }
   },
   computed: {
@@ -146,8 +147,39 @@ export default {
         <p>類型: {{ restaurant.Genre }}</p>
         <p>價格範圍: NT${{ restaurant.Price }}</p>
       </div>
+      <div
+        v-if="loaded"
+        class="restaurant-card"
+      >
+        <h3>貢獻</h3>
+        <p>
+          GitHub 倉庫: <NuxtLink
+            target="_blank"
+            to="https://github.com/kevinlee-06/npc-food"
+          >
+            前往
+          </NuxtLink>
+        </p>
+        <p>
+          餐廳資料: <NuxtLink
+            target="_blank"
+            :to="url"
+          >
+            檢視
+          </NuxtLink>
+        </p>
+        <p>
+          餐廳資料: <NuxtLink
+            target="_blank"
+            to="https://docs.google.com/spreadsheets/d/1aTIJGztYUYxPRU1O_7dT8Iwbl05r_YGu224_NYiZWtg/edit?usp=sharing"
+          >
+            登入並編輯
+          </NuxtLink>
+        </p>
+      </div>
     </div>
   </div>
+  <br>
 </template>
 
 <style>
