@@ -66,10 +66,7 @@ export default {
     <p>類型: {{ selectedRestaurant.Genre }}</p>
     <p>價格範圍: {{ selectedRestaurant.Price }}</p>
     <p>評論: {{ selectedRestaurant.Comments }}</p>
-    <div
-      class="map"
-      style="height:400px; width:600px"
-    >
+    <div class="map">
       <LMap
         :center="[lat, lon]"
         :use-global-leaflet="false"
@@ -193,5 +190,11 @@ button {
 .selected {
   background-color: var(--bg-selected);
   color: white;
+}
+
+.map {
+  width: 100%;
+  height: 400px;
+  margin-top: 20px;
 }
 </style>
