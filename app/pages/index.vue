@@ -61,7 +61,7 @@ export default {
     v-if="selectedRestaurant"
     class="selected-restaurant"
   >
-    <h3>{{ selectedRestaurant.Restaurant }}</h3>
+    <h2>{{ selectedRestaurant.Restaurant }}</h2>
     <p>地點: {{ selectedRestaurant.Location }}</p>
     <p>類型: {{ selectedRestaurant.Genre }}</p>
     <p>價格範圍: {{ selectedRestaurant.Price }}</p>
