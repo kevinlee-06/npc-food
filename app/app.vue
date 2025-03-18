@@ -141,32 +141,14 @@ html {
   font-family: Arial, Helvetica, sans-serif;
 }
 :root {
-  --bg: #fff;
-  --bg-contrast: #111;
-  --bg-contrast-2: #333;
-  --bg-contrast-3: #555;
-  --bg-contrast-4: #777;
-  --bg-contrast-5: #999;
-  --bg-contrast-6: #bbb;
-  --bg-contrast-7: #ddd;
-  --bg-contrast-8: #eee;
-  --bg-contrast-9: #f3f3f3;
-  --bg-contrast-10: #f8f8f8;
-  --bg-selected: #e8efff;
+  --bg: #f4f7f8;
+  --card: #ffffff;
+  --text: #333;
 }
 .dark {
-  --bg: #242424;
-  --bg-contrast: #fff;
-  --bg-contrast-2: #eee;
-  --bg-contrast-3: #ddd;
-  --bg-contrast-4: #bbb;
-  --bg-contrast-5: #999;
-  --bg-contrast-6: #777;
-  --bg-contrast-7: #555;
-  --bg-contrast-8: #333;
-  --bg-contrast-9: #222;
-  --bg-contrast-10: #111;
-  --bg-selected: #333;
+  --bg: #333;
+  --card: #444;
+  --text: #f4f7f8;
 }
 
 .container {
