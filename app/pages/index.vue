@@ -82,7 +82,7 @@ export default {
 
   <div
     v-if="selectedRestaurant"
-    class="selected-restaurant"
+    class="selected-restaurant card"
   >
     <h2>{{ selectedRestaurant.Restaurant }}</h2>
     <div class="restaurant-details">
@@ -164,7 +164,7 @@ export default {
       <div
         v-for="restaurant in restaurants"
         :key="restaurant.Restaurant"
-        class="restaurant-card"
+        class="restaurant-card card"
         :class="{ selected: selectedRestaurant === restaurant }"
         @click="toggleDetails(restaurant)"
       >
@@ -235,17 +235,29 @@ button {
   width: 100%;
 }
 
-.selected-restaurant {
-  border: 0;
+.card {
   box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.05);
-  padding: 2rem;
   border-radius: 8px;
-  background-color: var(--card);
-  width: 100%;
-  transition: all 0.25s ease;
-  max-width: 800px;
-  overflow: hidden;
   text-decoration: none;
+  background-color: var(--card);
+  border: 0;
+  transition: all 0.25s ease;
+  overflow: hidden;
+
+  p {
+    margin: 0;
+  }
+  h2 {
+    margin: 0 0 8px;
+  }
+  h3 {
+    margin: 0 0 2px;
+  }
+}
+.selected-restaurant {
+  padding: 2rem;
+  width: 100%;
+  max-width: 800px;
 }
 
 .restaurant-grid {
@@ -255,15 +267,8 @@ button {
 }
 
 .restaurant-card {
-  border: 0;
-  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.05);
   padding: 10px;
-  border-radius: 8px;
-  background-color: var(--card);
   cursor: pointer;
-  transition: all 0.25s ease;
-  overflow: hidden;
-  text-decoration: none;
 }
 
 .restaurant-card:hover {
