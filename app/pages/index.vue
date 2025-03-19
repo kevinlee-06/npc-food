@@ -88,18 +88,18 @@ export default {
     <div class="restaurant-details">
       <div class="restaurant-p-container">
         <p v-if="selectedRestaurant.Location">
-          地點: {{ selectedRestaurant.Location }}
+          地點：{{ selectedRestaurant.Location }}
         </p>
         <p v-if="selectedRestaurant.Price">
-          價格範圍: NT${{ selectedRestaurant.Price }}
+          價格範圍：NT${{ selectedRestaurant.Price }}
         </p>
         <p v-if="selectedRestaurant.Discounts">
-          優惠: {{ selectedRestaurant.Discounts }}
+          優惠：{{ selectedRestaurant.Discounts }}
         </p>
         <p v-if="selectedRestaurant.Comments">
-          留言: {{ selectedRestaurant.Comments }}
+          留言：{{ selectedRestaurant.Comments }}
         </p>
-        <p>付款方式: {{ paymentMethods }}</p>
+        <p>付款方式：{{ paymentMethods }}</p>
       </div>
       <NuxtLink
         v-if="selectedRestaurant.OrderOnline"
@@ -176,8 +176,8 @@ export default {
         @click="toggleDetails(restaurant)"
       >
         <h3>{{ restaurant.Restaurant }}</h3>
-        <p>地點: {{ restaurant.Location }}</p>
-        <p>價格範圍: NT${{ restaurant.Price }}</p>
+        <p>地點：{{ restaurant.Location }}</p>
+        <p>價格範圍：NT${{ restaurant.Price }}</p>
       </div>
       <div
         v-if="loaded"
