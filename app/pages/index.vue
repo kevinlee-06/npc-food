@@ -128,7 +128,6 @@ export default {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <LMarker
-          draggable
           :lat-lng="[lat, lon]"
         >
           <LPopup>{{ selectedRestaurant.Restaurant }}</LPopup>
