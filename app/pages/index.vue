@@ -122,8 +122,7 @@ export default {
         :zoom="zoom"
       >
         <LTileLayer
-          attribution="&amp;copy; <a href=&quot;https://www.openstreetmap.org/&quot;>OpenStreetMap</a> contributors"
-          layer-type="base"
+          attribution="ntut.club"
           name="OpenStreetMap"
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
