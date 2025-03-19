@@ -15,6 +15,11 @@ useHead({
   ],
 })
 
+// const autoScroll = useCookie('auto-scroll', {
+//   default: () => true,
+//   watch: true,
+// })
+
 const isDark = useDark()
 const toggleDark = useToggle(isDark)
 
