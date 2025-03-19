@@ -174,8 +174,6 @@ body {
 #header-mobile-menu {
   background-color: #333 !important;
   margin: 0;
-  z-index: 9999;
-  /* color: white !important; */
 
   ul,
   & {
