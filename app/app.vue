@@ -140,16 +140,20 @@ const [mobileMenuOpen, toggleMobileMenu] = useToggle(false)
 html {
   font-family: Arial, Helvetica, sans-serif;
 }
+
 :root {
   --bg: #f4f7f8;
   --card: #ffffff;
   --text: #333;
+  --anchor: #008cff;
   --transition: 0.15s ease;
 }
+
 .dark {
   --bg: #333;
   --card: #444;
   --text: #f4f7f8;
+  --anchor: #a3e8ff;
 }
 
 .container {
@@ -161,6 +165,7 @@ html {
   padding: 2rem;
   background-color: var(--bg);
 }
+
 #header,
 #header-mobile-menu {
   background-color: #333 !important;

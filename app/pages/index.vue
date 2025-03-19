@@ -220,6 +220,10 @@ p {
   color: var(--text);
 }
 
+a {
+  color: var(--anchor);
+}
+
 button {
   background-color: var(--text);
   color: var(--bg);
