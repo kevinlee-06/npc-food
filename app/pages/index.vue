@@ -175,7 +175,7 @@ export default {
       </div>
       <div
         v-if="loaded"
-        class="restaurant-card"
+        class="restaurant-card card"
       >
         <h3>貢獻</h3>
         <p>
