@@ -126,6 +126,18 @@ export default {
           name="OpenStreetMap"
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
+        <LControl position="bottomleft">
+          <NuxtLink
+            target="_blank"
+            :to="`https://www.google.com/maps/search/?api=1&query=${selectedRestaurant.Restaurant}`"
+          >
+            <button
+              style="background: white; color: black; padding: 0.5rem; border-radius: 5px; margin: 0;"
+            >
+              打開 Google 地圖
+            </button>
+          </NuxtLink>
+        </LControl>
         <LMarker
           :lat-lng="[lat, lon]"
         >
@@ -283,7 +295,7 @@ button {
   margin-top: 20px;
 
   .leaflet-container {
-    border-radius: 1rem;
+    border-radius: 0.5rem;
   }
 }
 
