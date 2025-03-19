@@ -29,18 +29,6 @@ export default {
     lon() {
       return this.selectedRestaurant ? Number.parseFloat(this.selectedRestaurant.Longitude) : 0
     },
-    paymentMethods() {
-      const methods = []
-      if (this.selectedRestaurant) {
-        if (this.selectedRestaurant.LinePay === '1') methods.push('Line Pay')
-        if (this.selectedRestaurant.TWQR === '1') methods.push('TWQR')
-        if (this.selectedRestaurant.Cash === '1') methods.push('現金')
-        if (this.selectedRestaurant.EasyCard === '1') methods.push('悠遊卡')
-        if (this.selectedRestaurant.CreditCard === '1') methods.push('信用卡')
-        if (this.selectedRestaurant.JKO === '1') methods.push('街口支付')
-      }
-      return methods.length > 0 ? methods.join(', ') : '無可用付款方式'
-    },
   },
 
   mounted() {
@@ -96,10 +84,18 @@ export default {
         <p v-if="selectedRestaurant.Discounts">
           優惠：{{ selectedRestaurant.Discounts }}
         </p>
+        <p>付款方式：{{ selectedRestaurant.PaymentMethods }}</p>
         <p v-if="selectedRestaurant.Comments">
-          留言：{{ selectedRestaurant.Comments }}
+          留言：
         </p>
-        <p>付款方式：{{ paymentMethods }}</p>
+        <div
+          v-if="selectedRestaurant.Comments"
+          class="restaurant-comments"
+        >
+          <p>
+            {{ selectedRestaurant.Comments }}
+          </p>
+        </div>
       </div>
       <NuxtLink
         v-if="selectedRestaurant.OrderOnline"
@@ -307,5 +303,13 @@ button {
   .restaurant-p-container {
     margin-right: 1rem;
   }
+}
+
+.restaurant-comments {
+  padding: 1rem;
+  background-color: var(--comment);
+  border-radius: 8px;
+  margin-top: 1rem;
+  display: inline-block;
 }
 </style>

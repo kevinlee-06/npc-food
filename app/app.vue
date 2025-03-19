@@ -147,6 +147,7 @@ html {
   --text: #333;
   --anchor: #008cff;
   --transition: 0.15s ease;
+  --comment: #0073ff1c;
 }
 
 .dark {
@@ -154,6 +155,7 @@ html {
   --card: #444;
   --text: #f4f7f8;
   --anchor: #a3e8ff;
+  --comment: #565656;
 }
 
 body {
