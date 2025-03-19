@@ -6,8 +6,6 @@ import IconGitHub from '~icons/mingcute/github-fill'
 import IconMenu from '~icons/mingcute/menu-fill'
 import IconMoon from '~icons/mingcute/moon-fill'
 
-import 'assets/reset.css'
-
 useHead({
   title: '北科程式設計研究社',
   link: [
@@ -155,6 +153,10 @@ html {
   --anchor: #a3e8ff;
 }
 
+body {
+  margin: 0;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -168,6 +170,7 @@ html {
 #header,
 #header-mobile-menu {
   background-color: #333 !important;
+  margin: 0;
   /* color: white !important; */
 
   ul,
