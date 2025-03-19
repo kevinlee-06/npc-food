@@ -90,9 +90,6 @@ export default {
         <p v-if="selectedRestaurant.Location">
           地點: {{ selectedRestaurant.Location }}
         </p>
-        <p v-if="selectedRestaurant.Genre">
-          類型: {{ selectedRestaurant.Genre }}
-        </p>
         <p v-if="selectedRestaurant.Price">
           價格範圍: NT${{ selectedRestaurant.Price }}
         </p>
@@ -180,7 +177,6 @@ export default {
       >
         <h3>{{ restaurant.Restaurant }}</h3>
         <p>地點: {{ restaurant.Location }}</p>
-        <p>類型: {{ restaurant.Genre }}</p>
         <p>價格範圍: NT${{ restaurant.Price }}</p>
       </div>
       <div
