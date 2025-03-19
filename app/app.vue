@@ -128,7 +128,10 @@ const [mobileMenuOpen, toggleMobileMenu] = useToggle(false)
       </li>
     </menu>
   </Transition>
-  <div class="container">
+  <div
+    v-show="!mobileMenuOpen"
+    class="container"
+  >
     <NuxtPage />
   </div>
 </template>
@@ -171,6 +174,7 @@ body {
 #header-mobile-menu {
   background-color: #333 !important;
   margin: 0;
+  z-index: 9999;
   /* color: white !important; */
 
   ul,
