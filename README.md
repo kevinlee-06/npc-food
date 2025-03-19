@@ -23,7 +23,8 @@
 
 ### 餐廳資料 (CSV)
 
-若要編輯餐廳資料，請登入北科 Gmail 帳號後直接編輯[此 Google 試算表](https://docs.google.com/spreadsheets/d/1aTIJGztYUYxPRU1O_7dT8Iwbl05r_YGu224_NYiZWtg/edit?usp=sharing)。
+若要編輯餐廳資料，請登入北科 Gmail 帳號後直接編輯[此試算表](https://docs.google.com/spreadsheets/d/1aTIJGztYUYxPRU1O_7dT8Iwbl05r_YGu224_NYiZWtg/edit?usp=sharing)。
+若無北科帳號，可填寫[此表單](https://forms.gle/LTYt6Fn6godcoA1a9)。
 
 ### 前端開發 (Nuxt.js)
 
