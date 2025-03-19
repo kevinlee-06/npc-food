@@ -211,11 +211,7 @@ export default {
 <style>
 h1,
 h2,
-h3 {
-  color: var(--text);
-  margin-bottom: 1rem;
-}
-
+h3,
 p {
   color: var(--text);
 }

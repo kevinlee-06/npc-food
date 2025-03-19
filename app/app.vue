@@ -172,7 +172,7 @@ body {
 
 #header,
 #header-mobile-menu {
-  background-color: #333 !important;
+  background-color: #333;
   margin: 0;
 
   ul,
