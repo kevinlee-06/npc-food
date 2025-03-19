@@ -22,7 +22,7 @@ const toggleDark = useToggle(isDark)
 
 const routes = {
   '/': '北科美食地圖',
-  'https://github.com/kevinlee-06/npc-food': '貢獻',
+  '/contribute': '貢獻',
 }
 
 const breakpoints = useBreakpoints(breakpointsSematic)
