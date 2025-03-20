@@ -43,9 +43,9 @@ const [mobileMenuOpen, toggleMobileMenu] = useToggle(false)
 
   <header
     id="header"
-    class="flex justify-between items-center h-16 p-4 bg-zinc-800 dark:bg-zinc-900"
+    class="flex justify-between items-center h-16 py-2 px-8 bg-zinc-800 dark:bg-zinc-900"
   >
-    <div class="left flex-1">
+    <div class="left flex-1 my-4">
       <a href="/">
         <img
           class="h-8"
@@ -56,10 +56,10 @@ const [mobileMenuOpen, toggleMobileMenu] = useToggle(false)
 
     <template v-if="isMobile">
       <div class="right">
-        <ul class="flex gap-2">
+        <ul class="flex gap-2 ">
           <li>
             <button
-              class="text-white"
+              class="text-white flex justify-center items-center"
               @click="toggleMobileMenu()"
             >
               <IconClose v-if="mobileMenuOpen" />
@@ -72,7 +72,7 @@ const [mobileMenuOpen, toggleMobileMenu] = useToggle(false)
 
     <template v-else>
       <nav class="center flex flex-1 justify-center">
-        <ul class="flex gap-4">
+        <ul class="flex gap-4 my-4">
           <li
             v-for="(route, path) in routes"
             :key="path"
@@ -88,22 +88,22 @@ const [mobileMenuOpen, toggleMobileMenu] = useToggle(false)
       </nav>
 
       <div class="right flex flex-1 gap-2 justify-end">
-        <ul class="flex gap-2">
-          <li>
+        <ul class="flex gap-2 my-4 items-center">
+          <li class="flex items-center">
             <a
               class="text-white"
               href="https://to.ntut.club/discord"
               target="_blank"
             ><IconDiscord /></a>
           </li>
-          <li>
+          <li class="flex items-center">
             <a
               class="text-white"
               href="https://github.com/kevinlee-06/npc-food"
               target="_blank"
             ><IconGitHub /></a>
           </li>
-          <li>
+          <li class="flex items-center">
             <button
               class="text-white"
               @click="toggleDark()"
@@ -169,13 +169,11 @@ const [mobileMenuOpen, toggleMobileMenu] = useToggle(false)
 </template>
 
 <style>
-/* You can keep any custom styles here if needed */
 .menu-enter-from,
 .menu-leave-to {
   opacity: 0;
   transform: translateY(-1rem);
 }
-
 .container {
   max-width: 10000px;
 }
