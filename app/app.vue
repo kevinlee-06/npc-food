@@ -35,20 +35,33 @@ const [mobileMenuOpen, toggleMobileMenu] = useToggle(false)
 </script>
 
 <template>
+  <meta
+    content="width=device-width, initial-scale=1.0"
+    name="viewport"
+  >
   <NuxtRouteAnnouncer />
 
-  <header id="header">
-    <div class="left">
+  <header
+    id="header"
+    class="flex justify-between items-center h-16 p-4 bg-zinc-800 dark:bg-zinc-900"
+  >
+    <div class="left flex-2">
       <a href="/">
-        <img src="assets/img/npc-horizontal.svg">
+        <img
+          class="h-8"
+          src="assets/img/npc-horizontal.svg"
+        >
       </a>
     </div>
 
     <template v-if="isMobile">
       <div class="right">
-        <ul>
+        <ul class="flex gap-2">
           <li>
-            <button @click="toggleMobileMenu()">
+            <button
+              class="text-white"
+              @click="toggleMobileMenu()"
+            >
               <IconClose v-if="mobileMenuOpen" />
               <IconMenu v-else />
             </button>
@@ -58,35 +71,43 @@ const [mobileMenuOpen, toggleMobileMenu] = useToggle(false)
     </template>
 
     <template v-else>
-      <nav class="center">
-        <ul>
+      <nav class="center flex flex-1 justify-center">
+        <ul class="flex gap-4">
           <li
             v-for="(route, path) in routes"
             :key="path"
           >
-            <NuxtLink :to="path">
+            <NuxtLink
+              class="text-white hover:underline"
+              :to="path"
+            >
               {{ route }}
             </NuxtLink>
           </li>
         </ul>
       </nav>
 
-      <div class="right">
-        <ul>
+      <div class="right flex flex-2 gap-2 justify-end">
+        <ul class="flex gap-2">
           <li>
             <a
+              class="text-white"
               href="https://to.ntut.club/discord"
               target="_blank"
             ><IconDiscord /></a>
           </li>
           <li>
             <a
+              class="text-white"
               href="https://github.com/kevinlee-06/npc-food"
               target="_blank"
             ><IconGitHub /></a>
           </li>
           <li>
-            <button @click="toggleDark()">
+            <button
+              class="text-white"
+              @click="toggleDark()"
+            >
               <IconMoon />
             </button>
           </li>
@@ -99,35 +120,41 @@ const [mobileMenuOpen, toggleMobileMenu] = useToggle(false)
     <menu
       v-if="mobileMenuOpen"
       id="header-mobile-menu"
+      class="absolute inset-x-0 top-16 flex flex-col p-6 gap-4 bg-zinc-800 dark:bg-zinc-900 text-white transition-all duration-400"
     >
       <li
         v-for="(name, path) in routes"
         :key="path"
       >
         <NuxtLink
-          class="mobile-menu-route"
+          class="mobile-menu-route flex items-center gap-2 p-2 hover:bg-zinc-700 dark:hover:bg-zinc-600"
           :to="path"
           @click="toggleMobileMenu()"
         >
           {{ name }}
         </NuxtLink>
       </li>
-      <div class="separator" />
+      <div class="border-t border-zinc-600" />
       <li>
         <a
+          class="flex items-center gap-2 p-2 hover:bg-zinc-700 dark:hover:bg-zinc-600"
           href="https://to.ntut.club/discord"
           target="_blank"
         ><IconDiscord />Discord</a>
       </li>
       <li>
         <a
+          class="flex items-center gap-2 p-2 hover:bg-zinc-700 dark:hover:bg-zinc-600"
           href="https://github.com/kevinlee-06/npc-food"
           target="_blank"
         ><IconGitHub />GitHub</a>
       </li>
-      <div class="separator" />
+      <div class="border-t border-zinc-600" />
       <li>
-        <button @click="() => { toggleDark(); toggleMobileMenu(); }">
+        <button
+          class="flex items-center gap-2 p-2 hover:bg-zinc-700 dark:hover:bg-zinc-600"
+          @click="() => { toggleDark(); toggleMobileMenu(); }"
+        >
           <IconMoon />深色主題
         </button>
       </li>
@@ -135,158 +162,21 @@ const [mobileMenuOpen, toggleMobileMenu] = useToggle(false)
   </Transition>
   <div
     v-show="!mobileMenuOpen"
-    class="container"
+    class="container flex flex-col items-center justify-start max-w-screen-x2 min-h-screen p-8 bg-zinc-100 dark:bg-zinc-900"
   >
     <NuxtPage />
   </div>
 </template>
 
 <style>
-html {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-:root {
-  --bg: #f4f7f8;
-  --card: #ffffff;
-  --text: #333;
-  --anchor: #008cff;
-  --transition: 0.15s ease;
-  --comment: #0073ff1c;
-}
-
-.dark {
-  --bg: #333;
-  --card: #444;
-  --text: #f4f7f8;
-  --anchor: #a3e8ff;
-  --comment: #565656;
-}
-
-body {
-  margin: 0;
-}
-
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: start;
-  min-height: calc(100vh - 4rem);
-  padding: 2rem;
-  background-color: var(--bg);
-}
-
-#header,
-#header-mobile-menu {
-  background-color: #333;
-  margin: 0;
-
-  ul,
-  & {
-    display: flex;
-    gap: 0.5rem;
-    padding: 0;
-    > li {
-      display: flex;
-      align-items: center;
-      list-style: none;
-
-      &:hover {
-        cursor: pointer !important;
-        background-color: #fff3 !important;
-      }
-    }
-  }
-
-  button,
-  a {
-    all: unset;
-    display: flex;
-    padding: 0.5rem;
-    color: white !important;
-    & > svg {
-      height: 3rem;
-    }
-  }
-}
-
-#header {
-  font-family: 'Arial', 'Helvetica', sans-serif;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 4rem;
-  padding: 0.5rem 2rem;
-
-  > * {
-    flex: 1;
-    display: flex;
-    align-items: center;
-  }
-
-  > .left img {
-    height: 2rem;
-  }
-
-  > .center {
-    justify-content: center;
-
-    .router-link-active {
-      text-decoration: underline;
-      text-underline-offset: 0.5rem;
-    }
-  }
-
-  > .right {
-    justify-content: flex-end;
-  }
-}
-
+/* You can keep any custom styles here if needed */
 .menu-enter-from,
 .menu-leave-to {
   opacity: 0;
   transform: translateY(-1rem);
 }
 
-#header-mobile-menu {
-  position: absolute;
-  inset: 4rem 0 0 0;
-  display: flex;
-  flex-direction: column;
-  padding: 1.5rem;
-  gap: 1.5rem;
-  font-size: 2rem;
-  transition: all 0.4s ease;
-
-  li {
-    display: flex;
-    align-items: center;
-
-    > * {
-      all: unset;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.25rem 0.5rem;
-      width: 100%;
-      height: 100%;
-    }
-  }
-
-  .mobile-menu-route {
-    &::before {
-      content: '◆';
-      display: inline-block;
-      visibility: hidden;
-    }
-    &.router-link-active::before {
-      visibility: visible;
-    }
-  }
-
-  .separator {
-    border-top: calc(1em / 11) solid darkgray;
-  }
+.container {
+  max-width: 10000px;
 }
 </style>

@@ -10,5 +10,6 @@ export default defineNuxtConfig({
     'radix-vue/nuxt',
     'unplugin-icons/nuxt',
     '@nuxtjs/leaflet',
+    '@nuxtjs/tailwindcss',
   ],
 })

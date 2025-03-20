@@ -58,11 +58,15 @@ export default {
 </script>
 
 <template>
-  <h1 id="title">
+  <h1
+    id="title"
+    class="text-2xl font-bold text-zinc-800 dark:text-zinc-200 mb-4"
+  >
     {{ loaded ? "北科美食地圖" : "載入中..." }}
   </h1>
   <button
     v-if="loaded"
+    class="bg-zinc-700 text-white py-2 px-4 rounded transition duration-300 hover:bg-zinc-700 dark:bg-zinc-700 dark:hover:bg-zinc-600"
     @click="getRandomRestaurant"
   >
     亂數選擇餐廳
@@ -70,39 +74,47 @@ export default {
 
   <div
     v-if="selectedRestaurant"
-    class="selected-restaurant card"
+    class="selected-restaurant card p-8 max-w-2xl mx-auto bg-white shadow-lg rounded-lg dark:bg-zinc-800 mt-8"
   >
-    <h2>{{ selectedRestaurant.Restaurant }}</h2>
-    <div class="restaurant-details">
+    <h2 class="text-xl font-semibold text-zinc-800 dark:text-zinc-200">
+      {{ selectedRestaurant.Restaurant }}
+    </h2>
+    <div class="restaurant-details flex flex-wrap justify-between">
       <div class="restaurant-p-container">
-        <p v-if="selectedRestaurant.Location">
+        <p
+          v-if="selectedRestaurant.Location"
+          class="text-zinc-600 dark:text-zinc-400"
+        >
           地點：{{ selectedRestaurant.Location }}
         </p>
-        <p v-if="selectedRestaurant.Price">
+        <p
+          v-if="selectedRestaurant.Price"
+          class="text-zinc-600 dark:text-zinc-400"
+        >
           價格範圍：NT${{ selectedRestaurant.Price }}
         </p>
-        <p v-if="selectedRestaurant.Discounts">
+        <p
+          v-if="selectedRestaurant.Discounts"
+          class="text-zinc-600 dark:text-zinc-400"
+        >
           優惠：{{ selectedRestaurant.Discounts }}
         </p>
-        <p>付款方式：{{ selectedRestaurant.PaymentMethods }}</p>
-        <p v-if="selectedRestaurant.Comments">
-          留言：
+        <p class="text-zinc-600 dark:text-zinc-400">
+          付款方式：{{ selectedRestaurant.PaymentMethods }}
         </p>
-        <div
+        <p
           v-if="selectedRestaurant.Comments"
-          class="restaurant-comments"
+          class="text-zinc-600 dark:text-zinc-400"
         >
-          <p>
-            {{ selectedRestaurant.Comments }}
-          </p>
-        </div>
+          留言：{{ selectedRestaurant.Comments }}
+        </p>
       </div>
       <NuxtLink
         v-if="selectedRestaurant.OrderOnline"
         target="_blank"
         :to="selectedRestaurant.OrderOnline"
       >
-        <button class="order-button">
+        <button class="order-button bg-zinc-800 text-white py-2 px-4 rounded mt-4 dark:bg-zinc-700 dark:text-white">
           線上訂餐
         </button>
       </NuxtLink>
@@ -124,9 +136,7 @@ export default {
             target="_blank"
             :to="`https://www.google.com/maps/search/?api=1&query=${selectedRestaurant.Restaurant}`"
           >
-            <button
-              style="background: white; color: black; padding: 0.5rem; border-radius: 5px; margin: 0;"
-            >
+            <button class="bg-[#1b6ef3] text-white border border-[#1b6ef3] py-2 px-4 rounded m-0 hover:scale-105 transition-transform duration-200">
               打開 Google 地圖
             </button>
           </NuxtLink>
@@ -159,50 +169,29 @@ export default {
     </div>
   </div>
 
-  <div class="all-restaurants">
-    <h2 v-if="loaded">
+  <div class="all-restaurants mt-8">
+    <h2
+      v-if="loaded"
+      class="text-xl font-semibold text-zinc-800 dark:text-zinc-200 mb-4"
+    >
       所有餐廳:
     </h2>
-    <div class="restaurant-grid">
+    <div class="restaurant-grid grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
       <div
         v-for="restaurant in restaurants"
         :key="restaurant.Restaurant"
-        class="restaurant-card card"
-        :class="{ selected: selectedRestaurant === restaurant }"
+        class="restaurant-card card p-4 bg-white shadow-md rounded-lg cursor-pointer transition-transform duration-200 hover:scale-105 dark:bg-zinc-800 dark:text-zinc-200"
+        :class="{ 'bg-zinc-200 dark:bg-zinc-700': selectedRestaurant === restaurant }"
         @click="toggleDetails(restaurant)"
       >
-        <h3>{{ restaurant.Restaurant }}</h3>
-        <p>地點：{{ restaurant.Location }}</p>
-        <p>價格範圍：NT${{ restaurant.Price }}</p>
-      </div>
-      <div
-        v-if="loaded"
-        class="restaurant-card card"
-      >
-        <h3>貢獻</h3>
-        <p>
-          GitHub 倉庫: <NuxtLink
-            target="_blank"
-            to="https://github.com/kevinlee-06/npc-food"
-          >
-            前往
-          </NuxtLink>
+        <h3 class="text-lg font-semibold">
+          {{ restaurant.Restaurant }}
+        </h3>
+        <p class="text-zinc-600 dark:text-zinc-400">
+          {{ restaurant.Location }}
         </p>
-        <p>
-          餐廳資料: <NuxtLink
-            target="_blank"
-            :to="url"
-          >
-            檢視
-          </NuxtLink>
-        </p>
-        <p>
-          餐廳資料: <NuxtLink
-            target="_blank"
-            to="https://docs.google.com/spreadsheets/d/1aTIJGztYUYxPRU1O_7dT8Iwbl05r_YGu224_NYiZWtg/edit?usp=sharing"
-          >
-            登入並編輯
-          </NuxtLink>
+        <p class="text-zinc-600 dark:text-zinc-400">
+          NT${{ restaurant.Price }}
         </p>
       </div>
     </div>
@@ -210,75 +199,19 @@ export default {
   <br>
 </template>
 
-<style>
-h1,
-h2,
-h3,
-p {
-  color: var(--text);
-}
-
-a {
-  color: var(--anchor);
-}
-
-button {
-  background-color: var(--text);
-  color: var(--bg);
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  margin-bottom: 1rem;
-}
-.all-restaurants {
-  margin-top: 20px;
-  width: 100%;
-}
-
-.card {
-  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.05);
-  border-radius: 8px;
-  text-decoration: none;
-  background-color: var(--card);
-  border: 0;
-  transition: all 0.25s ease;
-  overflow: hidden;
-
-  p {
-    margin: 0;
-  }
-  h2 {
-    margin: 0 0 8px;
-  }
-  h3 {
-    margin: 0 0 2px;
-  }
-}
+<style scoped>
 .selected-restaurant {
   padding: 2rem;
   width: 100%;
   max-width: 800px;
 }
 
-.restaurant-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 20px;
-}
-
-.restaurant-card {
-  padding: 10px;
-  cursor: pointer;
-}
-
-.restaurant-card:hover {
-  transform: scale(1.05);
-}
-
-.selected {
-  background-color: var(--card);
+.restaurant-comments {
+  padding: 1rem;
+  background-color: var(--comment);
+  border-radius: 8px;
+  margin-top: 1rem;
+  display: inline-block;
 }
 
 .map {
@@ -289,27 +222,5 @@ button {
   .leaflet-container {
     border-radius: 0.5rem;
   }
-}
-
-.restaurant-details {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  .order-button {
-    margin: auto;
-    margin-top: 1rem;
-  }
-  .restaurant-p-container {
-    margin-right: 1rem;
-  }
-}
-
-.restaurant-comments {
-  padding: 1rem;
-  background-color: var(--comment);
-  border-radius: 8px;
-  margin-top: 1rem;
-  display: inline-block;
 }
 </style>
