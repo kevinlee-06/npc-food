@@ -45,7 +45,7 @@ const [mobileMenuOpen, toggleMobileMenu] = useToggle(false)
     id="header"
     class="flex justify-between items-center h-16 p-4 bg-zinc-800 dark:bg-zinc-900"
   >
-    <div class="left flex-2">
+    <div class="left flex-1">
       <a href="/">
         <img
           class="h-8"
@@ -87,7 +87,7 @@ const [mobileMenuOpen, toggleMobileMenu] = useToggle(false)
         </ul>
       </nav>
 
-      <div class="right flex flex-2 gap-2 justify-end">
+      <div class="right flex flex-1 gap-2 justify-end">
         <ul class="flex gap-2">
           <li>
             <a
