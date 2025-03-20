@@ -11,9 +11,4 @@ export default defineNuxtConfig({
     'unplugin-icons/nuxt',
     '@nuxtjs/leaflet',
   ],
-  postcss: {
-    plugins: {
-      'postcss-nesting': {},
-    },
-  },
 })
